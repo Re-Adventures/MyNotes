@@ -29,15 +29,15 @@
 Syntax: `Mnemonic(S)(Condition) dest, operand1, operand2`
 
 * Example:
-1. add  r0, r1, r2 // r0 = r1 + r2
+1. `add  r0, r1, r2 // r0 = r1 + r2`
 
-2. add  r3, r4, #4 // r3 = r4 + 4, integers are prefixed by a "#" symbol
+2. `add  r3, r4, #4 // r3 = r4 + 4, integers are prefixed by a "#" symbol`
 
-3. add  r0, r1     // same as r0 = r0 + r1
+3. `add  r0, r1     // same as r0 = r0 + r1`
 
-4. add**s** r0, r1, r2 // r0 = r1 + r2, & sets the cspr flags
+4. `adds r0, r1, r2 // r0 = r1 + r2, & sets the cspr flags`
 
-5. movgt r3, r3, #5 // r3 = 5 if r3 > 5 else nop
+5. `movgt r3, r3, #5 // r3 = 5 if r3 > 5 else nop`
 
 ## Running and compiling ARM on x64 based system
 
