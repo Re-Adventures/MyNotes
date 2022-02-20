@@ -5,15 +5,15 @@
 
 ## Registers
 
-R0-R6: General Purpose Registers
-R7: Syscall number
-R8-R10: General Purpose Registers
-R11: Frame Pointer (same as EBP in x86)
-R12: Intra Procedural Call (IP)
-R13: Stack Pointer (SP)
-R14: Link Register (LR)
-R15: Program Counter (same as IP in x86)
-CSPR: Current Program State Registers (same as EFLAGS in x86)
+* R0-R6: General Purpose Registers
+* R7: Syscall number
+* R8-R10: General Purpose Registers
+* R11: Frame Pointer (same as EBP in x86)
+* R12: Intra Procedural Call (IP)
+* R13: Stack Pointer (SP)
+* R14: Link Register (LR)
+* R15: Program Counter (same as IP in x86)
+* CSPR: Current Program State Registers (same as EFLAGS in x86)
 
 
 * R7 holds the syscall number
@@ -26,7 +26,7 @@ CSPR: Current Program State Registers (same as EFLAGS in x86)
 
 # Instruction Syntax
 
-* Syntax: Mnemonic(S)(Condition) dest, operand1, operand2
+Syntax: `Mnemonic(S)(Condition) dest, operand1, operand2`
 
 * Example:
 1. add  r0, r1, r2 // r0 = r1 + r2
