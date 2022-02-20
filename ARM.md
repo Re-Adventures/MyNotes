@@ -65,7 +65,7 @@ _start:
 exit:
   mov  r7, #1   //syscall for write
   mov  r0, #0   //error code
-  swi  0
+  svc  0        //another way of performing syscall
 
 ```
 
