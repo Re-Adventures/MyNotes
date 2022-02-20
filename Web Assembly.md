@@ -34,7 +34,7 @@ where:
 Example
 ```wasm
 (module
-  (func $myFunction (param $p1 i32) (param $p2 i32) (return i32)
+  (func $myFunction (param $p1 i32) (param $p2 i32) (result i32)
   )
 )
 ```
@@ -47,7 +47,7 @@ There are two ways to access arguments:
 
 ```wasm
 (module
-  (func $add (param $p0 i32) (param $p1 i32) (return i32)
+  (func $add (param $p0 i32) (param $p1 i32) (result i32)
     local.get 0   ;;using index
     local.get $p1 ;;using variable name
     i32.add
@@ -64,7 +64,7 @@ Once we defined our funtion, we need to export that function so that it is visib
 Example
 ```wasm
 (module
-  (func $add (param $p0 i32) (param $p1 i32) (return i32)
+  (func $add (param $p0 i32) (param $p1 i32) (result i32)
     local.get 0
     local.get 1
     i32.add
