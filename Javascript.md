@@ -1,7 +1,7 @@
-* For executing script, the script should be inside script tag or we can just include our javascript file
+For executing script, the script should be inside script tag or we can just include our javascript file
 `<script src="myJSFile.js"></script>`
 
-* For printing data
+For printing data
 
 We can use document.getElementById(id) to access html element
 And then use the innerHTML property on that to print on that specific element
