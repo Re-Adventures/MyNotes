@@ -1,7 +1,8 @@
+# Javascript
 For executing script, the script should be inside script tag or we can just include our javascript file
 `<script src="myJSFile.js"></script>`
 
-For printing data
+## Printing data
 
 We can use document.getElementById(id) to access html element
 And then use the innerHTML property on that to print on that specific element
@@ -16,7 +17,7 @@ And then use the innerHTML property on that to print on that specific element
 ```
 
 
-// For declaring a varible
+## Declaring variables
 
 ```js
 var x = 10;
@@ -38,8 +39,56 @@ my_elem.appendChild(my_text);
 document.body.appendChild(my_elem);
 ```
 
+## Loops
 
-## objects
+1. for loop: it is similar to the c for loop
+```js
+for(initilization; conditon; add/sub){
+  ...
+}
+```
+2. while
+```js
+while(condition){
+  ...
+}
+```
+
+3. do while
+```js
+do{
+  ...
+}while(condition);
+```
+4. for in: generally used for iterating over object
+```js
+O = {"A": 1, "B": 2};
+for(key in O){
+  console.log(key); //gets keys of the object
+}
+```
+5. for of: can be used for various datatypes like arrays, strings, map, etc.
+```js
+var arr = [1, 2, 3];
+for(elem of arr){
+  console.log(elem);
+}
+```
+
+* Label
+We can also give labels to loops to easily continue/break out of loop
+
+```js
+myLoop: for(...){
+  while(...){
+    ...
+    break myLoop;  // breaks out of the for loop
+  }
+}
+
+```
+
+## Objects
 
 * An object in JavaScript is an entity with property and type.
 * A property is a variable attached to the object.
@@ -71,7 +120,7 @@ Javascript also have arrow functions
 x = (arg1, arg2, ...) => someOperations;
 ```
 
-*We can pass variable number of arguments to function and access them using arguments keyword
+* We can pass variable number of arguments to function and access them using arguments keyword
 
 ```js
 function summ(){
