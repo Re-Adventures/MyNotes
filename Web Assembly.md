@@ -54,7 +54,28 @@ There are two ways to access arguments:
   )
 )
 ```
-  
+
+## Calling other functions
+
+We can call other function using `call` keyword
+
+```wasm
+(module
+  ;; This func has index 0
+  (func $SomeFunc (...) (result ...)
+    ...
+  )
+
+  ;; This func has index 1
+  (func $add (...) (result ...)
+    ...
+    call $SomeFunc
+    ;; We can also do call 0
+
+  )
+)
+```
+
 ## Calling using JS
 Once we defined our funtion, we need to export that function so that it is visible to our javascript. This can be done using following syntax:
 
