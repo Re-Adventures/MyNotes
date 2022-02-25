@@ -35,6 +35,7 @@ Example
 ```wasm
 (module
   (func $myFunction (param $p1 i32) (param $p2 i32) (result i32)
+    (local $var1 f32)
   )
 )
 ```
@@ -51,6 +52,37 @@ There are two ways to access arguments:
     local.get 0   ;;using index
     local.get $p1 ;;using variable name
     i32.add
+  )
+)
+```
+
+## Declaring variables
+
+* We can use the `local` keyword for declaring variables
+
+```wasm
+(module
+  (func $ReturnConst (result i32)
+    (local $var1 i32)
+    local.get $var1
+    i32.const 1
+    i32.add
+  )
+)
+```
+
+The instruction `i32.const 1` pushes 1 as i32 into the stack
+
+## get & set methods
+
+`local.get` & `local.set` are two methods which are used for pushing & popping values from stack respectively.
+
+```wasm
+(module
+  (func $MyFunc (param $p0 i32) (result i32)
+    (local $var0 i32)
+    local.get $p0   ;;push value of $p0 into stack
+    local.set $var0 ;;pop the value from top of stack into $var0
   )
 )
 ```
