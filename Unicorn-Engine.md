@@ -6,8 +6,9 @@
 
 * Unicorn is written in C & has bindings for various languages including Python & Rust
 
-* We can download unicorn from [here](https://www.unicorn-engine.org/) or if we install *pwntools* & unicorn is installed automatically with it.
+* We can download unicorn from [here](https://www.unicorn-engine.org/) or if we install **pwntools** & unicorn is installed automatically with it.
 
+## Emulating some code
 Lets try to emulate some x64 code using python
 
 * First writing some x64 code that we need to emulate. I will use nasm syntax
@@ -35,7 +36,7 @@ with open("code.bin", "rb") as fp:
   bytecode = fp.read()
 
 # This address can be anything
-# On this address the emulation will happen
+# On this address the emulation will proceed
 ADDR = 0x100000
 ```
 
