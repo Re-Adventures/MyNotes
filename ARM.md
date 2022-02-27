@@ -63,10 +63,52 @@ _start:
   swi  0        //software interrupt
 
 exit:
-  mov  r7, #1   //syscall for write
+  mov  r7, #1   //syscall for exit
   mov  r0, #0   //error code
   svc  0        //another way of performing syscall
 
 ```
 
+## Finding strlen of a string
+
+* A string in C ends with a null byte (\0), so we can just get characters from string byte by byte & count the number unless we encounter a null byte
+
+```asm
+.global _start
+
+.section .data
+  msg:  .ascii  "Hello World\n", "\0"
+
+.section .text
+_start:
+  ldr  r0, =msg // Passing the string for calculating strlen
+  bl   strlen
+
+  mov  r2, r0 // strlen
+  mov  r7, #4
+  mov  r0, #1
+  ldr  r1, =msg
+  swi  0
+  bl   exit
+
+strlen:
+  eor  r1, r1  //r1 will store the strlen
+
+strlen_loop:
+  ldrb r2, [r0]    //load a byte from string into r2
+  cmp  r2, #0      //If it is a null byte then stop the loop
+  beq  strlen_end
+  add  r1, #1      //Increment the counter
+  add  r0, #1
+  b    strlen_loop
+
+strlen_end:
+  mov  r0, r1
+  bx   lr  // return
+
+exit:
+  mov  r7, #1
+  eor  r0, r0
+  swi  0
+```
 
