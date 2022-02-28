@@ -1,3 +1,5 @@
+# C#
+
 First we need to install dotnet compiler. We will use the command line utility
 We can download that from [here](https://dotnet.microsoft.com/download/dotnet)
 
@@ -175,6 +177,116 @@ class Employee{
     }
   }
 }
+```
+
+### Constructor
+
+* Classes can have constructors which is called automatically when an object of class is created.
+
+* Constructor have the same name as the class.
+
+```cs
+class Employee{
+  // constructor
+  public Employee(){
+    ....
+  }
+}
+```
+
+* We can also pass parameters to constructor
+
+* Classes can have multiple constructors based on the number of arguments passed
+
+```cs
+class Employee{
+  // constructor1 with no parameters
+  public Employee(){
+    ....
+  }
+  // constructor2 with parameters
+  public Employee(int id, string name){
+    ....
+  }
+}
+
+```
+
+### Inheritance
+
+```cs
+class Member{
+  public int Id;
+  public string Name;
+
+  //protected so as to make it accessible to its inheriting classes
+  protected int phone;
+}
+
+// Student inheriting properties from Member class
+class Student: Member{
+  ...
+}
+
+```
+
+## Exception Handling
+
+* We can identify & handle the exceptions in the runtime using the `try catch` blocks
+
+* We can have multiple catch blocks based on the exception occured
+
+```cs
+while(true){
+  try{
+    Console.Write("Enter your age: ");
+    Age = Int.Parse(Console.ReadLine());
+    break;
+  }
+  catch(FormatException){
+    Console.WriteLine("Error while converting to int");
+  }
+  catch(Exception e){
+    Console.WriteLine("Error");
+  }
+}
+
+
+```
+
+* The general exception catcher `catch(Exception e)` should be the last catch block defined.
+
+
+## Enum
+
+* Enum is a list of int which have a name associated with it. It is used to make the code more readable.
+
+Syntax
+```cs
+enum EnumName{
+  Name1 = val1,
+  Name2 = val2,
+  ...
+}
+```
+
+* By default the values start with 0, but we can specify any integer number.
+
+* The EnumName actually becomes a datatype, so whenever we are using the values of enums, we need a varible which has the datatype EnumName or we can do an int cast of the result.
+
+```cs
+enum Moves{
+  UP = 0,
+  DOWN = 1,
+  LEFT = 2,
+  RIGHT = 3
+}
+
+Moves myVar1 = Moves.UP;
+
+// or
+int myVar2 = (int)Moves.UP;
+
 ```
 
 
