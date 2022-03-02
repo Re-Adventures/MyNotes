@@ -108,8 +108,8 @@ We can call other function using `call` keyword
 )
 ```
 
-## Calling using JS
-Once we defined our funtion, we need to export that function so that it is visible to our javascript. This can be done using following syntax:
+## Calling WebAsm functions using JS
+* Once we defined our funtion, we need to export that function so that it is visible to our javascript. This can be done using following syntax:
 
  ```wasm
 (export "FunctionNameVisibleToJS" (func $MyFunction))
@@ -127,10 +127,12 @@ Example
 
 ```
 
-Now we need to convert this wat file to wasm file
+* Now we need to convert this wat file to wasm file. For that there is a utility known as `wat2wam` which can be installed along with [wabt](https://github.com/WebAssembly/wabt)
+
+`wat2wasm filename.wat`
 
 
-Finally we can call this function using js using the following code snippet
+* Finally we can call this function using js using the following code snippet
 ```js
 WebAssembly.instantiateStreaming(fetch('filename.wasm'))
   .then(obj => {
@@ -138,3 +140,94 @@ WebAssembly.instantiateStreaming(fetch('filename.wasm'))
   });
 ```
 
+## Accessing JS Functions
+
+* We can call JS functions from Webassembly. For that we need to first export the function from JS
+
+
+```js
+var import_object = {
+  "MyFunctions": {
+    "FunctionNameVisibleToWebAsm": (args) => Whatever operation
+    /*"Log": (arg) => console.log(arg)*/
+  }
+}
+```
+* The object has to be two leveled, because Webasm uses two level namespaces
+
+* Also when intantiating the WebAssembly, we need to pass the import_object object too.
+
+```js
+fetch("filename.wasm")
+  .then(response => response.arrayBuffer())
+  .then(bytes => WebAssembly.instantiate(bytes, import_object))
+  .then(response => {
+    // Our code
+    response.instantiate.exports.FuncName(args);
+  });
+```
+
+
+* On the webasm side we need to use the `import` keyword.
+
+```wasm
+(module
+  (import "MyFunctions" "FunctionNameVisibleToWebAsm" (func $log (param i32)))
+)
+```
+* Now we can just call func $log normally
+
+* The import should always be at the start
+
+## Global Variables
+
+* We can create global variables using the `global` keyword
+
+Syntax:
+```wasm
+(global $varName varType)
+```
+
+Example
+```wasm
+(global $g (mut i32) (i32.const 1)) ;;assigning 1 to $g
+```
+
+* We can also create Webasm global variables from JS
+
+```js
+var import_object = {
+  "import": {
+    "globalVar": new WebAssembly.Global({value: "i32", mutable: true}, 1234)
+  }
+}
+```
+
+On webasm side
+```wasm
+(global $g (import "import" "globalVar" (mut i32)))
+```
+
+For accessing & setting global variables, we have to use `global.get` & `global.set`
+
+```wasm
+  global.get $g
+  ...
+  global.set $g
+```
+
+
+
+## Random Notes
+
+* According to wasm calling conventions, the parameters are pushed left to right.
+
+* When performing operations like sub, add, the top element is the right operand while the 2nd element from top is left operand
+```
+Stack:
+  v0  <-- Top of Stack
+  v1
+```
+
+And if we perform sub, the equation will look like
+  `v1 - v0`
