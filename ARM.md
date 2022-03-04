@@ -41,11 +41,31 @@ Syntax: `Mnemonic(S)(Condition) dest, operand1, operand2`
 
 ## Running and compiling ARM on x64 based system
 
-* For compiling we would require cross compilers
+* For compiling we would require cross compilers because I am on x86 machine & this is arm code. For installing arm cross compiler
+```sh
+sudo apt install gcc-5-arm-linux-gnueabi
+```
+
+* After the installation, we first need to assemble the assembly file & convert it into an object file
+```sh
+arm-linux-gnueabihf-as prog.asm -o prog.o
+```
+
+* Now we need to link this object file to make it an executable file
+```sh
+arm-linux-gnueabihf-ld prog.o -o a.out
+```
 
 * For emulating we will use qemu
 ```sh
 sudo apt install qemu
+```
+
+* Now we can just run it
+```sh
+qemu-arm ./a.out
+# or just
+./a.out
 ```
 
 
@@ -71,7 +91,7 @@ exit:
 
 ## Finding strlen of a string
 
-* A string in C ends with a null byte (\0), so we can just get characters from string byte by byte & count the number unless we encounter a null byte
+* A string in C ends with a null byte (\0), so we can just get characters from string byte by byte & increment the counter unless we encounter a null byte.
 
 ```asm
 .global _start
