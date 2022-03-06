@@ -217,6 +217,94 @@ For accessing & setting global variables, we have to use `global.get` & `global.
 ```
 
 
+## Memory
+
+* We can consider memory as an array where we can store/retrieve data from a specific index
+
+* We can define a memory region using `memory` keyword
+
+Syntax:
+```wasm
+(memory 1)
+```
+
+* The 1 is the size of memory in pages. According to MDN, a page is 64KB
+
+* There can be only one memory region
+
+* We can resize the memory
+
+* We can also create memory from JS
+
+Syntax:
+
+```js
+var import_object = {
+  "MyUtils": {
+    "MyMem": new WebAssembly.Memory({initial: 1}) //size
+  } 
+};
+```
+
+On wasm side
+
+```wasm
+(import "MyUtils" "MyMem" (memory 1))
+```
+
+* For storing & retrieving the data from memory, we have two keywords `datatype.load` & `datatype.store`
+
+Example:
+```wasm
+i32.load 0
+i32.store 0
+```
+
+* Instead of a store, we can also use the `data` keyword for storing the data in memory
+
+Example:
+```wasm
+(memory 1)
+(data (i32.const 0) "Hello")
+         ;; offset  Value
+```
+
+
+### Accessing data from memory
+
+1. Store
+* The store operation works on three values, two offsets & one constant
+
+* The two offset are base address & offset from that base.
+
+* From the three values, two are poped from stack & 1 from the instruction itself
+
+The operation is of the form Memory[Base + offset] = value
+
+Examples
+```wasm
+i32.const 1    ;;base
+i32.const 1234 ;;value to store
+i32.store 0    ;;offset from base, it can be skipped
+
+;; It just means Memory[1 + 0] = 1234
+```
+
+2. Load
+* The load operation takes two arguments, one from stack & one from the instruction itself
+
+* The base is taken from stack & offset from the instruction
+
+* The value retireved is stored on top of stack
+
+Example
+```wasm
+i32.const 12 ;;base
+i32.load  0  ;;offset
+
+;; Which is TOS = Memory[12 + 0]
+```
+
 
 ## Random Notes
 
