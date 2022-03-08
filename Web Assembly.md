@@ -256,8 +256,8 @@ On wasm side
 
 Example:
 ```wasm
-i32.load 0
-i32.store 0
+i32.load
+i32.store
 ```
 
 * Instead of a store, we can also use the `data` keyword for storing the data in memory
@@ -283,9 +283,9 @@ The operation is of the form Memory[Base + offset] = value
 
 Examples
 ```wasm
-i32.const 1    ;;base
-i32.const 1234 ;;value to store
-i32.store 0    ;;offset from base, it can be skipped
+i32.const 1        ;;base
+i32.const 1234     ;;value to store
+i32.store offset=0 ;;offset from base, it can be skipped
 
 ;; It just means Memory[1 + 0] = 1234
 ```
@@ -299,8 +299,8 @@ i32.store 0    ;;offset from base, it can be skipped
 
 Example
 ```wasm
-i32.const 12 ;;base
-i32.load  0  ;;offset
+i32.const 12        ;;base
+i32.load  offset=0  ;;offset
 
 ;; Which is TOS = Memory[12 + 0]
 ```
