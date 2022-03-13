@@ -141,5 +141,5 @@ qemu-arm -L /usr/arm-linux-gnueabihf -g 9999 ./progName
 
 * On another terminal
 ```sh
-gdb-multiarch -q --nh -ex 'set architecture arm' -ex 'progName' -ex 'target remote localhost:9999' -ex 'layout split' -ex 'layout regs'
+gdb-multiarch -q --nh -ex 'set architecture arm' -ex 'file progName' -ex 'target remote localhost:9999' -ex 'layout split' -ex 'layout regs'
 ```
