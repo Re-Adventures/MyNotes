@@ -1181,7 +1181,7 @@ internal class BookAvailabilityConvertor : IValueConverter
 
 * Most of the elements have event handlers, which we cannot bind to when using the MVVM pattern.
 
-* For binding, first we need a package `Microsoft.Xaml.Behavious.Wpf`.
+* For binding, first we need a package `Microsoft.Xaml.Behaviors.Wpf`.
 
 * After installing, we need to include it in our xaml file
 
